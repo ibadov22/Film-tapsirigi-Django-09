@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Daxil ol · Movie Watchlist{% endblock %}
+{% block content %}
+<div class="row justify-content-center"><div class="col-md-6 col-lg-5"><div class="card"><div class="card-body p-4">
+  <h1 class="h3 mb-1">Xoş gəlmisiniz</h1><p class="text-secondary mb-4">Film siyahınıza daxil olun.</p>
+  <form method="post">{% csrf_token %}{% if form.non_field_errors %}<div class="alert alert-danger">İstifadəçi adı və ya şifrə yanlışdır.</div>{% endif %}
+    {% for field in form %}<div class="mb-3"><label class="form-label" for="{{ field.id_for_label }}">{% if field.name == 'username' %}İstifadəçi adı{% else %}Şifrə{% endif %}</label><input class="form-control" type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{ field.id_for_label }}" required>{% for error in field.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}</div>{% endfor %}
+    <button class="btn btn-primary w-100">Daxil ol</button>
+  </form><p class="text-center text-secondary mt-3 mb-0">Hesabınız yoxdur? <a href="{% url 'signup' %}">Qeydiyyatdan keçin</a></p>
+</div></div></div></div>
+{% endblock %}
